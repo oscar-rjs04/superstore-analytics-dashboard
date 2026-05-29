@@ -84,7 +84,28 @@ def line_chart_dual(df, x, y, year_col, month_col, color=None, title="", **kwarg
 
 
 def bar_chart(df, x, y, color=None, title="", orientation="v", **kwargs) -> go.Figure:
-    return apply_theme(px.bar(df, x=x, y=y, color=color, title=title, orientation=orientation, **kwargs))
+    cdm = kwargs.pop("color_discrete_map", None)
+    axis_col = y if orientation == "h" else x
+
+    one_color_per_bar = (
+        color is not None
+        and cdm is not None
+        and df.groupby(axis_col)[color].nunique().max() == 1
+    )
+
+    if one_color_per_bar:
+        marker_colors = [cdm.get(v, "#3B82F6") for v in df[color]]
+        fig = apply_theme(px.bar(df, x=x, y=y, title=title, orientation=orientation, **kwargs))
+        fig.update_traces(marker_color=marker_colors)
+    else:
+        if cdm:
+            kwargs["color_discrete_map"] = cdm
+        fig = apply_theme(px.bar(df, x=x, y=y, color=color, title=title, orientation=orientation, **kwargs))
+
+    if orientation == "h":
+        fig.update_layout(bargap=0.25, height=max(400, len(df) * 38))
+
+    return fig
 
 
 def pie_chart(df, names, values, title="", **kwargs) -> go.Figure:

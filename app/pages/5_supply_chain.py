@@ -13,7 +13,6 @@ from queries.supply_queries import (
 )
 from config import CATEGORY_COLORS, PALETTE
 
-st.set_page_config(page_title="Supply Chain", layout="wide")
 st.title("Supply Chain")
 
 years, regions, categories = render_filters()

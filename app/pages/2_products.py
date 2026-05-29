@@ -11,7 +11,6 @@ from queries.product_queries import (
 )
 from config import CATEGORY_COLORS
 
-st.set_page_config(page_title="Products", layout="wide")
 st.title("Product Analysis")
 
 years, regions, categories = render_filters()

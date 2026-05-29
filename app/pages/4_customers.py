@@ -9,7 +9,6 @@ from components.charts import bar_chart, pie_chart, scatter_chart
 from queries.customer_queries import get_by_segment, get_top_customers, get_customer_frequency
 from config import SEGMENT_COLORS
 
-st.set_page_config(page_title="Customers", layout="wide")
 st.title("Customer Analysis")
 
 years, regions, categories = render_filters()

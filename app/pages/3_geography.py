@@ -9,7 +9,6 @@ from components.charts import bar_chart, choropleth_us
 from queries.geo_queries import get_by_region, get_by_state, get_top_cities
 from config import REGION_COLORS, STATE_ABBREV
 
-st.set_page_config(page_title="Geography", layout="wide")
 st.title("Geographic Analysis")
 
 years, regions, categories = render_filters()

@@ -11,7 +11,6 @@ from queries.sales_queries import (
     get_revenue_by_category_year
 )
 
-st.set_page_config(page_title="Sales Overview", layout="wide")
 st.title("Sales Overview")
 
 years, regions, categories = render_filters()
